@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>誠太 週次セルフチェック（1画面完結版）</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #f5f6f8;
+      color: #333;
+      margin: 0;
+      padding: 16px;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 650px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    h1 {
+      font-size: 1.3rem;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 4px;
+      color: #2c3e50;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    .date-picker {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f8fafc;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    .date-picker label {
+      font-weight: bold;
+    }
+    .date-picker input {
+      padding: 6px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    h2.section-title {
+      font-size: 1.1rem;
+      background: #2c3e50;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-top: 24px;
+      margin-bottom: 16px;
+    }
+    .question-card {
+      background: #fafafa;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+    .question-title {
+      font-weight: bold;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+      color: #1a202c;
+    }
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .radio-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .radio-label input {
+      margin-top: 3px;
+    }
+    .text-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .text-group label {
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: #2d3748;
+    }
+    .hint {
+      font-size: 0.8rem;
+      color: #718096;
+      margin-bottom: 4px;
+    }
+    textarea {
+      width: 100%;
+      height: 75px;
+      padding: 8px;
+      font-size: 0.9rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+    .if-then-box {
+      background: #edf2f7;
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 6px;
+    }
+    .if-then-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .if-then-row span {
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: #2b6cb0;
+    }
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    .btn-line {
+      background-color: #06C755;
+      color: white;
+    }
+    .btn-copy {
+      background-color: #4A5568;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>誠太 週次セルフチェック</h1>
+  <div class="subtitle">メタ認知・If-Thenプラン対応版（1画面完結）</div>
+
+  <div class="date-picker">
+    <label for="checkDate">実施日:</label>
+    <input type="date" id="checkDate">
+  </div>
+
+  <form id="checkForm">
+    <!-- Part 1 -->
+    <h2 class="section-title">■ Part 1：状態のスコアリング（5段階評価）</h2>
+
+    <!-- Q1 -->
+    <div class="question-card">
+      <div class="question-title">1. 学習の質・集中度[span_1](start_span)[span_1](end_span)</div>
+      <div class="radio-group">
+        <label class="radio-label"><input type="radio" name="q1" value="5" checked> 5：非常に深く集中し、気づきや弱点克服ができた[span_2](start_span)[span_2](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q1" value="4"> 4：概ね集中できたが、一部作業になってしまった[span_3](start_span)[span_3](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q1" value="3"> 3：集中と散漫が半々くらいだった[span_4](start_span)[span_4](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q1" value="2"> 2：上の空になっている時間が長かった[span_5](start_span)[span_5](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q1" value="1"> 1：ほとんど集中できず、時間をやり過ごした[span_6](start_span)[span_6](end_span)</label>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-card">
+      <div class="question-title">2. 受験勉強時間（休日平均10時間、平日平均3.5時間）の確保ができたか？[span_7](start_span)[span_7](end_span)</div>
+      <div class="radio-group">
+        <label class="radio-label"><input type="radio" name="q2" value="5" checked> 5：ほぼ目標どおり、または目標以上に確保できた[span_8](start_span)[span_8](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q2" value="4"> 4：少し届かなかったが、全体としてかなり確保できた[span_9](start_span)[span_9](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q2" value="3"> 3：目標の半分以上は確保できた[span_10](start_span)[span_10](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q2" value="2"> 2：目標の半分未満しか確保できなかった[span_11](start_span)[span_11](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q2" value="1"> 1：ほとんど勉強時間を確保できなかった[span_12](start_span)[span_12](end_span)</label>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-card">
+      <div class="question-title">3. メンタルの波のコントロール（メタ認知）[span_13](start_span)[span_13](end_span)</div>
+      <div class="radio-group">
+        <label class="radio-label"><input type="radio" name="q3" value="5" checked> 5：客観視し、素早く切り替えられた[span_14](start_span)[span_14](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q3" value="4"> 4：波を感じたが、翌日には立て直せた[span_15](start_span)[span_15](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q3" value="3"> 3：波に飲み込まれそうになりながらも踏みとどまった[span_16](start_span)[span_16](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q3" value="2"> 2：不安に支配され、勉強や生活に支障が出た[span_17](start_span)[span_17](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q3" value="1"> 1：ネガティブな感情に完全に支配され数日引きずった[span_18](start_span)[span_18](end_span)</label>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-card">
+      <div class="question-title">4. 数学・物理の「戦略的クリア度」[span_19](start_span)[span_19](end_span)</div>
+      <div class="radio-group">
+        <label class="radio-label"><input type="radio" name="q4" value="5" checked> 5：弱点を明確に分析し、潰すための具体的な演習ができた[span_20](start_span)[span_20](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q4" value="4"> 4：弱点はある程度意識したが、完全な分析までは至らず[span_21](start_span)[span_21](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q4" value="3"> 3：量はこなしたが、全体的な演習にとどまった[span_22](start_span)[span_22](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q4" value="2"> 2：漫然と解くだけで戦略を持てなかった[span_23](start_span)[span_23](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q4" value="1"> 1：数学・物理の課題に真正面から向き合えなかった[span_24](start_span)[span_24](end_span)</label>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question-card">
+      <div class="question-title">5. 友人や家族と会話をしなかった日がなかったか？（連絡事項などを除く）[span_25](start_span)[span_25](end_span)</div>
+      <div class="radio-group">
+        <label class="radio-label"><input type="radio" name="q5" value="5" checked> 5：毎日、事務連絡ではない会話ができた[span_26](start_span)[span_26](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q5" value="4"> 4：ほぼ毎日できた（1日だけできなかった）[span_27](start_span)[span_27](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q5" value="3"> 3：半分以上の日で会話できた[span_28](start_span)[span_28](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q5" value="2"> 2：会話できた日は少なかった[span_29](start_span)[span_29](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q5" value="1"> 1：ほとんど会話できなかった[span_30](start_span)[span_30](end_span)</label>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-card">
+      <div class="question-title">6. 毎日、規則正しい就寝ができたか？[span_31](start_span)[span_31](end_span)</div>
+      <div class="radio-group">
+        <label class="radio-label"><input type="radio" name="q6" value="5" checked> 5：毎日ほぼ同じ時間帯に就寝できた[span_32](start_span)[span_32](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q6" value="4"> 4：おおむね一定の時間に就寝できた[span_33](start_span)[span_33](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q6" value="3"> 3：規則正しく寝られた日とそうでない日が半々[span_34](start_span)[span_34](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q6" value="2"> 2：就寝時間がかなり不規則だった[span_35](start_span)[span_35](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q6" value="1"> 1：ほとんど毎日不規則だった[span_36](start_span)[span_36](end_span)</label>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-card">
+      <div class="question-title">7. アクティブレスト（外出・散歩など、勉強場所から離れたリフレッシュ）[span_37](start_span)[span_37](end_span)</div>
+      <div class="radio-group">
+        <label class="radio-label"><input type="radio" name="q7" value="5" checked> 5：毎日外を歩き、頭と身体をリフレッシュできた[span_38](start_span)[span_38](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q7" value="4"> 4：ほぼ毎日できた（天候等の理由で1日のみ不出）[span_39](start_span)[span_39](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q7" value="3"> 3：半分以上の日で外に出てリフレッシュできた[span_40](start_span)[span_40](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q7" value="2"> 2：意識して外に出たのは数日のみ[span_41](start_span)[span_41](end_span)</label>
+        <label class="radio-label"><input type="radio" name="q7" value="1"> 1：ほとんど外に出ず、室内にこもりがちだった[span_42](start_span)[span_42](end_span)</label>
+      </div>
+    </div>
+
+    <!-- Part 2 -->
+    <h2 class="section-title">■ Part 2：リフレクションと来週のアクション</h2>
+
+    <div class="question-card">
+      <div class="question-title">1. 今週の成功要因（Keep）[span_43](start_span)[span_43](end_span)</div>
+      <div class="text-group">
+        <div class="hint">※「やる気が出た」などの感情論は禁止。「前日夜に準備した」など具体的な行動や環境の工夫を書く[span_44](start_span)[span_44](end_span)。</div>
+        <textarea id="keepText" placeholder="例：前日の夜に数学の参考書を開いた状態で机に置いたから"></textarea>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-title">2. 今週の事実ベースの課題（Problem）[span_45](start_span)[span_45](end_span)</div>
+      <div class="text-group">
+        <div class="hint">※「集中できなかった」という感想ではなく、「〇曜日の午後に〇〇をして〇時間ロスした」等の事実を書く[span_46](start_span)[span_46](end_span)。</div>
+        <textarea id="problemText" placeholder="例：水曜日の午後にスマホをいじってしまい、2時間ロスした"></textarea>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-title">3. 来週のアクション（Try：If-Thenプラン）[span_47](start_span)[span_47](end_span)</div>
+      <div class="text-group">
+        <div class="hint">※「〜を頑張る」は禁止。第三者が判定できる行動ルールにします[span_48](start_span)[span_48](end_span)。</div>
+        <div class="if-then-box">
+          <div class="if-then-row">
+            <span>もし（If）：</span>
+            <textarea id="ifText" placeholder="例：勉強中に焦りや不安で手が止まりそうに"></textarea>
+          </div>
+          <div class="if-then-row">
+            <span>その時は（Then）：</span>
+            <textarea id="thenText" placeholder="例：タイマーを20分セットして、一旦外に散歩に出る"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button type="button" class="btn-line" onclick="sendToLine()">LINEで送信・共有する</button>
+      <button type="button" class="btn-copy" onclick="copyToClipboard()">テキストをコピーする</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  // 今日の日付を初期値にセット
+  document.getElementById('checkDate').valueAsDate = new Date();
+
+  function buildMessage() {
+    const dateVal = document.getElementById('checkDate').value;
+    const q1 = document.querySelector('input[name="q1"]:checked').value;
+    const q2 = document.querySelector('input[name="q2"]:checked').value;
+    const q3 = document.querySelector('input[name="q3"]:checked').value;
+    const q4 = document.querySelector('input[name="q4"]:checked').value;
+    const q5 = document.querySelector('input[name="q5"]:checked').value;
+    const q6 = document.querySelector('input[name="q6"]:checked').value;
+    const q7 = document.querySelector('input[name="q7"]:checked').value;
+    
+    const keepText = document.getElementById('keepText').value.trim() || '特になし';
+    const problemText = document.getElementById('problemText').value.trim() || '特になし';
+    const ifText = document.getElementById('ifText').value.trim() || '特になし';
+    const thenText = document.getElementById('thenText').value.trim() || '特になし';
+
+    const text = `【誠太 週次セルフチェック】\n` +
+      `実施日: ${dateVal}\n\n` +
+      `■ Part 1：状態のスコアリング\n` +
+      `1. 学習の質・集中度: ${q1}/5\n` +
+      `2. 勉強時間確保: ${q2}/5\n` +
+      `3. メンタルコントロール(メタ認知): ${q3}/5\n` +
+      `4. 数学・物理 戦略的クリア度: ${q4}/5\n` +
+      `5. 友人・家族との会話: ${q5}/5\n` +
+      `6. 規則正しい就寝: ${q6}/5\n` +
+      `7. アクティブレスト: ${q7}/5\n\n` +
+      `■ Part 2：リフレクション\n` +
+      `【1. 今週の成功要因（Keep）】\n${keepText}\n\n` +
+      `【2. 事実ベースの課題（Problem）】\n${problemText}\n\n` +
+      `【3. 来週のアクション（If-Thenプラン）】\n` +
+      `・もし：${ifText}\n` +
+      `・その時：${thenText}`;
+
+    return text;
+  }
+
+  function sendToLine() {
+    const message = buildMessage();
+    const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(message)}`;
+    window.open(lineUrl, '_blank');
+  }
+
+  function copyToClipboard() {
+    const message = buildMessage();
+    navigator.clipboard.writeText(message).then(() => {
+      alert('チェック結果をクリップボードにコピーしました！');
+    }).catch(() => {
+      alert('コピーに失敗しました。');
+    });
+  }
+</script>
+
+</body>
+</html>
